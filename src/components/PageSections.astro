@@ -74,7 +74,13 @@ const { sections } = Astro.props;
           <Prose>
             <ol>
               {section.items.map((item) => (
-                <li>{item}</li>
+                <li>
+                  {typeof item === "string" ? (
+                    item
+                  ) : (
+                    <a href={withBase(item.href)} class="list-link">{item.title}</a>
+                  )}
+                </li>
               ))}
             </ol>
           </Prose>
