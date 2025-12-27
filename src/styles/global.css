@@ -258,6 +258,16 @@ ol {
   max-width: 100%;
 }
 
+.map-container {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.map-container iframe {
+  display: block;
+}
+
 .footer {
   background: #0f172a;
   color: #e2e8f0;

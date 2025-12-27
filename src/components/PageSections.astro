@@ -175,5 +175,25 @@ const { sections } = Astro.props;
     );
   }
 
+  if (section.type === "map") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <div class="map-container reveal">
+            <iframe
+              src={section.src}
+              width="100%"
+              height="400"
+              frameborder="0"
+              allowfullscreen
+              style="border: 0; border-radius: var(--radius-md);"
+            />
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
   return null;
 })}
