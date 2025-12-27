@@ -216,6 +216,12 @@ ol {
   max-width: 70ch;
 }
 
+.publications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .publication-card {
   border-left: 4px solid var(--color-secondary);
   padding: 20px 24px;
@@ -228,6 +234,18 @@ ol {
   font-size: 0.95rem;
   color: var(--color-muted);
   margin-bottom: 0.5rem;
+}
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.image-gallery img {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  max-width: 100%;
 }
 
 .footer {

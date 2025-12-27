@@ -5,6 +5,7 @@ import Card from "./Card.astro";
 import ButtonLink from "./ButtonLink.astro";
 import Prose from "./Prose.astro";
 import PublicationCard from "./PublicationCard.astro";
+import { withBase } from "../utils/paths";
 
 const { sections } = Astro.props;
 ---
@@ -137,7 +138,7 @@ const { sections } = Astro.props;
       <Section alt={index % 2 === 1}>
         <Container>
           {section.title ? <h2 class="section-title">{section.title}</h2> : null}
-          <div class="card-grid">
+          <div class="publications-list">
             {section.items.map((item) => (
               <PublicationCard
                 label={item.label}
@@ -146,6 +147,21 @@ const { sections } = Astro.props;
                 abstract={item.abstract}
                 citation={item.citation}
               />
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "image-section") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          <h2 class="section-title">{section.title}</h2>
+          <div class="image-gallery">
+            {section.images.map((img) => (
+              <img src={withBase(img)} alt={section.title} class="reveal" />
             ))}
           </div>
         </Container>

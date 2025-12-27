@@ -11,12 +11,14 @@
       ]
     },
     {
-      "type": "cards",
-      "title": "",
-      "items": [
-        { "title": "ESG Рейтинг" },
-        { "title": "Системный интегратор" }
-      ]
+      "type": "image-section",
+      "title": "ESG Рейтинг",
+      "images": ["/esg.png"]
+    },
+    {
+      "type": "image-section",
+      "title": "Системный интегратор",
+      "images": ["/integrator-1.png", "/integrator-2.png"]
     }
   ]
 }
