@@ -2,6 +2,7 @@
 
 export default defineConfig({
   output: "static",
-  site: "https://andrewx1x.github.io/nicur",
-  base: "/nicur"
+  site: "https://andrewx1x.github.io",
+  base: "/nicur",
+  trailingSlash: "always"
 });

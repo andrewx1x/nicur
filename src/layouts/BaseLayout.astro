@@ -4,11 +4,12 @@ import HeaderNav from "../components/HeaderNav.astro";
 import FooterContacts from "../components/FooterContacts.astro";
 import Container from "../components/Container.astro";
 import { site } from "../config/site";
+import { withBase } from "../utils/paths";
 
 const { title, description, canonical } = Astro.props;
 const pageTitle = title ? `${title} | ${site.name}` : site.name;
 const pageDescription = description || site.description;
-const canonicalUrl = canonical || new URL(Astro.url.pathname, site.url).toString();
+const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toString();
 ---
 <!doctype html>
 <html lang="ru">
@@ -21,9 +22,9 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, site.url).toString
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content={new URL("og-image.svg", site.url).toString()} />
+    <meta property="og:image" content={new URL(withBase("/og-image.svg"), Astro.site).toString()} />
     <meta property="og:type" content="website" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
   </head>
   <body>
     <div class="notice-banner">
