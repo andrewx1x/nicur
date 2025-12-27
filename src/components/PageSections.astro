@@ -1,0 +1,157 @@
+﻿---
+import Container from "./Container.astro";
+import Section from "./Section.astro";
+import Card from "./Card.astro";
+import ButtonLink from "./ButtonLink.astro";
+import Prose from "./Prose.astro";
+import PublicationCard from "./PublicationCard.astro";
+
+const { sections } = Astro.props;
+---
+{sections.map((section, index) => {
+  if (section.type === "hero") {
+    return (
+      <Section class="hero">
+        <Container>
+          <div class="hero-card reveal">
+            <h1>{section.title}</h1>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "cards") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <div class="card-grid">
+            {section.items.map((item) => (
+              <Card title={item.title} href={item.href} />
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "links") {
+    return (
+      <Section>
+        <Container>
+          {index === 0 ? (
+            <h1 class="section-title">{section.title}</h1>
+          ) : (
+            <h2 class="section-title">{section.title}</h2>
+          )}
+          <div class="card-grid">
+            {section.items.map((item) => (
+              <Card title={item.label} href={item.href} />
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "list") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          <h2 class="section-title">{section.title}</h2>
+          {section.subtitle ? (
+            <p>
+              {section.subtitle.split("\n").map((line, lineIndex, lines) => (
+                <>
+                  {line}
+                  {lineIndex < lines.length - 1 ? <br /> : null}
+                </>
+              ))}
+            </p>
+          ) : null}
+          <Prose>
+            <ol>
+              {section.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ol>
+          </Prose>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "ordered") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          <h2 class="section-title">{section.title}</h2>
+          <Prose>
+            <ol>
+              {section.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ol>
+          </Prose>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "link") {
+    return (
+      <Section>
+        <Container>
+          <div class="card reveal">
+            <ButtonLink href={section.href}>{section.title}</ButtonLink>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "text") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? (
+            index === 0 ? (
+              <h1 class="section-title">{section.title}</h1>
+            ) : (
+              <h2 class="section-title">{section.title}</h2>
+            )
+          ) : null}
+          <Prose>
+            {section.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </Prose>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "publications") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <div class="card-grid">
+            {section.items.map((item) => (
+              <PublicationCard
+                label={item.label}
+                title={item.title}
+                authors={item.authors}
+                abstract={item.abstract}
+                citation={item.citation}
+              />
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  return null;
+})}

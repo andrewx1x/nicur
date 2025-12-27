@@ -1,0 +1,15 @@
+﻿{
+  "title": "Человеческий Капитал",
+  "description": "Раздел Человеческий капитал.",
+  "sections": [
+    {
+      "type": "links",
+      "title": "Человеческий Капитал",
+      "items": [
+        { "label": "Здравоохранение", "href": "https://google.com" },
+        { "label": "Образование", "href": "https://google.com" },
+        { "label": "Культура", "href": "/kultura" }
+      ]
+    }
+  ]
+}

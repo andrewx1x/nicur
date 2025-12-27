@@ -1,0 +1,6 @@
+﻿---
+const { class: className = "" } = Astro.props;
+---
+<div class={`prose ${className}`.trim()}>
+  <slot />
+</div>

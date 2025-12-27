@@ -1,0 +1,17 @@
+﻿---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+---
+<BaseLayout title="Страница не найдена" description="Запрашиваемая страница не найдена.">
+  <Section>
+    <Container>
+      <div class="hero-card reveal">
+        <h1>Страница не найдена</h1>
+        <p>К сожалению, запрашиваемая страница отсутствует.</p>
+        <ButtonLink href="/">Вернуться на главную</ButtonLink>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>

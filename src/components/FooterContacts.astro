@@ -1,0 +1,13 @@
+﻿---
+import Container from "./Container.astro";
+import { site } from "../config/site";
+---
+<footer class="footer">
+  <Container>
+    <h3>{site.contacts.title}</h3>
+    <p>{site.contacts.city}</p>
+    <p>{site.contacts.phone}</p>
+    <p>{site.contacts.email}</p>
+    <p class="notice">{site.notice}</p>
+  </Container>
+</footer>

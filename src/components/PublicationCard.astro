@@ -1,0 +1,12 @@
+﻿---
+const { label, title, authors, abstract, citation } = Astro.props;
+---
+<div class="publication-card reveal">
+  {label ? <div class="publication-meta">{label}</div> : null}
+  <h3>{title}</h3>
+  <div class="publication-meta">Авторы: {authors}</div>
+  <div class="publication-meta">Аннотация</div>
+  <p>{abstract}</p>
+  <div class="publication-meta">Ссылка для цитирования:</div>
+  <p>{citation}</p>
+</div>

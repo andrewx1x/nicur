@@ -1,0 +1,8 @@
+﻿---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageSections from "../components/PageSections.astro";
+import content from "../content/pages/index.json";
+---
+<BaseLayout title="Главная" description={content.description}>
+  <PageSections sections={content.sections} />
+</BaseLayout>

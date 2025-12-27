@@ -1,0 +1,16 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect x="80" y="120" width="1040" height="390" rx="32" fill="#ffffff" opacity="0.08" />
+  <text x="120" y="290" fill="#ffffff" font-family="Montserrat, sans-serif" font-size="48" font-weight="700">
+    Национальный исследовательский центр
+  </text>
+  <text x="120" y="350" fill="#cbd5f5" font-family="Open Sans, sans-serif" font-size="28">
+    устойчивого развития
+  </text>
+</svg>

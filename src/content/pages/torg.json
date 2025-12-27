@@ -1,0 +1,11 @@
+﻿{
+  "title": "Торговля",
+  "description": "Раздел Торговля.",
+  "sections": [
+    {
+      "type": "text",
+      "title": "Торговля",
+      "paragraphs": []
+    }
+  ]
+}

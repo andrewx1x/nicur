@@ -1,0 +1,6 @@
+﻿---
+const { title, alt = false, class: className = "" } = Astro.props;
+---
+<section class={`section ${alt ? "section-alt" : ""} ${className}`.trim()}>
+  <slot />
+</section>
