@@ -8,7 +8,7 @@ import { site } from "../config/site";
 const { title, description, canonical } = Astro.props;
 const pageTitle = title ? `${title} | ${site.name}` : site.name;
 const pageDescription = description || site.description;
-const canonicalUrl = canonical || site.url + Astro.url.pathname;
+const canonicalUrl = canonical || new URL(Astro.url.pathname, site.url).toString();
 ---
 <!doctype html>
 <html lang="ru">
@@ -21,7 +21,7 @@ const canonicalUrl = canonical || site.url + Astro.url.pathname;
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content={`${site.url}/og-image.svg`} />
+    <meta property="og:image" content={new URL("og-image.svg", site.url).toString()} />
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>

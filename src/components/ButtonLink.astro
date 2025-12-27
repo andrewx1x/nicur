@@ -1,6 +1,9 @@
 ﻿---
+import { withBase } from "../utils/paths";
+
 const { href } = Astro.props;
+const resolvedHref = withBase(href);
 ---
-<a class="button-link" href={href}>
+<a class="button-link" href={resolvedHref}>
   <slot />
 </a>

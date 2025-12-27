@@ -133,6 +133,7 @@ ol {
   font-weight: 700;
   font-size: 1.1rem;
   color: var(--color-primary);
+  max-width: 320px;
 }
 
 .nav-links {
@@ -190,6 +191,7 @@ ol {
 .card-title {
   font-weight: 600;
   margin-bottom: 0.5rem;
+  color: var(--color-primary);
 }
 
 .button-link {

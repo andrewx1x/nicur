@@ -1,19 +1,21 @@
 ﻿---
 import Container from "./Container.astro";
 import { navigation } from "../config/navigation";
+import { stripBase, withBase } from "../utils/paths";
 const { currentPath = "/" } = Astro.props;
+const normalizedPath = stripBase(currentPath);
 const isActive = (href) =>
-  href === "/" ? currentPath === "/" : currentPath.startsWith(href);
+  href === "/" ? normalizedPath === "/" : normalizedPath.startsWith(href);
 ---
 <header class="navbar">
   <Container>
     <div class="navbar-inner">
-      <a class="brand" href="/">Национальный исследовательский центр устойчивого развития</a>
+      <a class="brand" href={withBase("/")}>Национальный исследовательский центр устойчивого развития</a>
       <nav class="nav-links" aria-label="Главная навигация">
         {navigation.map((item) => (
           <a
             class={`nav-link ${isActive(item.href) ? "is-active" : ""}`}
-            href={item.href}
+            href={withBase(item.href)}
           >
             {item.label}
           </a>

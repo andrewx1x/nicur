@@ -1,10 +1,13 @@
 ﻿---
+import { withBase } from "../utils/paths";
+
 const { title, href } = Astro.props;
+const resolvedHref = withBase(href);
 ---
 <div class="card reveal">
   {title ? (
-    href ? (
-      <a class="card-title" href={href}>{title}</a>
+    resolvedHref ? (
+      <a class="card-title" href={resolvedHref}>{title}</a>
     ) : (
       <div class="card-title">{title}</div>
     )
