@@ -184,12 +184,13 @@ const { sections } = Astro.props;
             <iframe
               src={section.src}
               width="100%"
-              height="400"
+              height="500"
               frameborder="0"
               allowfullscreen
               style="border: 0; border-radius: var(--radius-md);"
             />
           </div>
+          {section.subtitle ? <p class="map-subtitle">{section.subtitle}</p> : null}
         </Container>
       </Section>
     );
