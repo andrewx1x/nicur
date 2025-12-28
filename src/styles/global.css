@@ -275,6 +275,26 @@ ol {
   color: var(--color-muted);
 }
 
+.map-objects {
+  margin-top: 16px;
+}
+
+.map-objects-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--color-primary);
+}
+
+.map-objects-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.map-objects-list li {
+  margin-bottom: 4px;
+}
+
 .carousel {
   position: relative;
   overflow: hidden;

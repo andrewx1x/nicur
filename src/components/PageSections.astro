@@ -184,12 +184,22 @@ const { sections } = Astro.props;
             <iframe
               src={section.src}
               width="100%"
-              height="500"
+              height="400"
               frameborder="0"
               allowfullscreen
               style="border: 0; border-radius: var(--radius-md);"
             />
           </div>
+          {section.items && section.items.length > 0 ? (
+            <div class="map-objects">
+              <p class="map-objects-title">Объекты на карте:</p>
+              <ol class="map-objects-list">
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ol>
+            </div>
+          ) : null}
           {section.subtitle ? <p class="map-subtitle">{section.subtitle}</p> : null}
         </Container>
       </Section>
