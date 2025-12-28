@@ -298,8 +298,9 @@ ol {
 
 .carousel-slide img {
   width: 100%;
-  height: 450px;
-  object-fit: cover;
+  height: 600px;
+  object-fit: contain;
+  background: #f3f4f6;
 }
 
 .carousel-btn {
