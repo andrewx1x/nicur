@@ -55,6 +55,20 @@
       ]
     },
     {
+      "type": "carousel",
+      "title": "Фотографии",
+      "images": [
+        "/photos/norilsk/2193004d-6493-4dfb-9.jpg",
+        "/photos/norilsk/32a34c7d-9c99-49d1-8.jpg",
+        "/photos/norilsk/3faea8cc-287a-4101-a.jpg",
+        "/photos/norilsk/51c3a9fd-f82c-496b-a.jpg",
+        "/photos/norilsk/5a147690-87ee-434b-8.jpg",
+        "/photos/norilsk/8fb2ce47-4901-4de4-8.jpg",
+        "/photos/norilsk/ca781492-32ac-4023-9.jpg",
+        "/photos/norilsk/e72b6541-20e8-4f07-9.jpg.jpg"
+      ]
+    },
+    {
       "type": "map",
       "title": "г. Сосновоборск",
       "subtitle": "Нац проект \"Демография\". Объект на карте:",

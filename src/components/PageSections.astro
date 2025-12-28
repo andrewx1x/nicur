@@ -196,5 +196,32 @@ const { sections } = Astro.props;
     );
   }
 
+  if (section.type === "carousel") {
+    const carouselId = `carousel-${index}`;
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <div class="carousel reveal" id={carouselId}>
+            <div class="carousel-inner">
+              {section.images.map((img, imgIndex) => (
+                <div class={`carousel-slide ${imgIndex === 0 ? 'active' : ''}`}>
+                  <img src={withBase(img)} alt={`${section.title} ${imgIndex + 1}`} />
+                </div>
+              ))}
+            </div>
+            <button class="carousel-btn carousel-prev" data-carousel={carouselId} aria-label="Предыдущий">&#10094;</button>
+            <button class="carousel-btn carousel-next" data-carousel={carouselId} aria-label="Следующий">&#10095;</button>
+            <div class="carousel-dots">
+              {section.images.map((_, imgIndex) => (
+                <button class={`carousel-dot ${imgIndex === 0 ? 'active' : ''}`} data-carousel={carouselId} data-index={imgIndex} aria-label={`Слайд ${imgIndex + 1}`}></button>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
   return null;
 })}
