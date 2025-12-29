@@ -6,8 +6,8 @@
       "type": "links",
       "title": "Человеческий Капитал",
       "items": [
-        { "label": "Здравоохранение", "href": "https://google.com" },
-        { "label": "Образование", "href": "https://google.com" },
+        { "label": "Здравоохранение", "href": "/zdravoohranenie" },
+        { "label": "Образование", "href": "/obrazovanie" },
         { "label": "Культура", "href": "/kultura" }
       ]
     }
