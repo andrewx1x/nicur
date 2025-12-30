@@ -23,7 +23,7 @@
       "items": [
         { "icon": "🏥", "label": "Здравоохранение", "href": "/zdravoohranenie" },
         { "icon": "🎓", "label": "Образование", "href": "/obrazovanie" },
-        { "icon": "🎭", "label": "Культура", "href": "/kultura" }
+        { "icon": "🏛️", "label": "Культура", "href": "/kultura" }
       ]
     },
     {
