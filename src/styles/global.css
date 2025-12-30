@@ -377,6 +377,42 @@ ol {
   transform: scale(1.2);
 }
 
+.tiles-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 32px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #2563eb 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 280px;
+}
+
+.tile:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 24px 48px rgba(30, 58, 138, 0.25);
+}
+
+.tile-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.tile-label {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
 .footer {
   background: #0f172a;
   color: #e2e8f0;

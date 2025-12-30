@@ -206,6 +206,24 @@ const { sections } = Astro.props;
     );
   }
 
+  if (section.type === "tiles") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <div class="tiles-grid">
+            {section.items.map((item) => (
+              <a href={withBase(item.href)} class="tile reveal">
+                <span class="tile-icon">{item.icon}</span>
+                <span class="tile-label">{item.label}</span>
+              </a>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
   if (section.type === "carousel") {
     const carouselId = `carousel-${index}`;
     return (
