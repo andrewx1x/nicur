@@ -224,6 +224,113 @@ const { sections } = Astro.props;
     );
   }
 
+  if (section.type === "stats") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <div class="stats-grid">
+            {section.items.map((item) => (
+              <div class="stat-card reveal">
+                <span class="stat-value">{item.value}</span>
+                <span class="stat-label">{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "timeline") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <div class="timeline">
+            {section.items.map((item) => (
+              <div class="timeline-item reveal">
+                <div class="timeline-marker">
+                  <span class="timeline-year">{item.year}</span>
+                </div>
+                <div class="timeline-content">
+                  <h3 class="timeline-title">{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "features") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <div class="features-grid">
+            {section.items.map((item) => (
+              <div class="feature-card reveal">
+                <span class="feature-icon">{item.icon}</span>
+                <h3 class="feature-title">{item.title}</h3>
+                <p class="feature-text">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "table") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <div class="table-wrapper reveal">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  {section.headers.map((header) => (
+                    <th>{header}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {section.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => (
+                      <td>{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "sources") {
+    return (
+      <Section>
+        <Container>
+          <div class="sources-block reveal">
+            <p class="sources-title">Источники информации:</p>
+            <ul class="sources-list">
+              {section.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
   if (section.type === "carousel") {
     const carouselId = `carousel-${index}`;
     return (

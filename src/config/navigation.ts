@@ -5,5 +5,6 @@
   { label: "Строительство", href: "/stroutelstvo" },
   { label: "Торговля", href: "/torg" },
   { label: "Инфраструктурный кластер", href: "/klaster" },
-  { label: "Уголь и углехимия", href: "/ugol" }
+  { label: "Уголь и углехимия", href: "/ugol" },
+  { label: "Лес", href: "/lec" }
 ];
