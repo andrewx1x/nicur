@@ -1,6 +1,5 @@
 ﻿---
 import "../styles/global.css";
-import { createHash } from "node:crypto";
 import HeaderNav from "../components/HeaderNav.astro";
 import FooterContacts from "../components/FooterContacts.astro";
 import Container from "../components/Container.astro";
@@ -11,11 +10,6 @@ const { title, description, canonical } = Astro.props;
 const pageTitle = title ? `${title} | ${site.name}` : site.name;
 const pageDescription = description || site.description;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toString();
-const sitePassword = import.meta.env.SITE_PASSWORD;
-const isPasswordGateEnabled = typeof sitePassword === "string" && sitePassword.length > 0;
-const sitePasswordHash = isPasswordGateEnabled
-  ? createHash("sha256").update(sitePassword).digest("hex")
-  : "";
 ---
 <!doctype html>
 <html lang="ru">
@@ -31,38 +25,8 @@ const sitePasswordHash = isPasswordGateEnabled
     <meta property="og:image" content={new URL(withBase("/og-image.svg"), Astro.site).toString()} />
     <meta property="og:type" content="website" />
     <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
-    {
-      isPasswordGateEnabled ? (
-        <script is:inline define:vars={{ sitePasswordHash }}>
-          try {
-            const key = "__nicur_access_hash";
-            const granted = sessionStorage.getItem(key) === sitePasswordHash;
-            if (!granted) {
-              document.documentElement.classList.add("site-lock-active");
-            }
-          } catch {
-            document.documentElement.classList.add("site-lock-active");
-          }
-        </script>
-      ) : null
-    }
   </head>
   <body>
-    {isPasswordGateEnabled ? (
-      <div class="site-lock" id="site-lock" aria-modal="true" role="dialog" aria-labelledby="site-lock-title">
-        <div class="site-lock-panel">
-          <h2 id="site-lock-title">Доступ к сайту</h2>
-          <p>Введите пароль для просмотра сайта.</p>
-          <form id="site-lock-form" class="site-lock-form">
-            <label for="site-password-input">Пароль</label>
-            <input id="site-password-input" type="password" autocomplete="current-password" required />
-            <button type="submit">Войти</button>
-          </form>
-          <p id="site-lock-error" class="site-lock-error" aria-live="polite"></p>
-        </div>
-      </div>
-    ) : null}
-
     <div class="notice-banner">
       <Container>
         {site.notice}
@@ -73,64 +37,7 @@ const sitePasswordHash = isPasswordGateEnabled
       <slot />
     </main>
     <FooterContacts />
-    <script define:vars={{ isPasswordGateEnabled, sitePasswordHash }}>
-      async function sha256Hex(value) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(value);
-        const digest = await crypto.subtle.digest('SHA-256', data);
-        return Array.from(new Uint8Array(digest))
-          .map((b) => b.toString(16).padStart(2, '0'))
-          .join('');
-      }
-
-      if (isPasswordGateEnabled) {
-        const storageKey = '__nicur_access_hash';
-        const lockRoot = document.getElementById('site-lock');
-        const lockForm = document.getElementById('site-lock-form');
-        const input = document.getElementById('site-password-input');
-        const error = document.getElementById('site-lock-error');
-
-        const unlock = () => {
-          document.documentElement.classList.remove('site-lock-active');
-          lockRoot?.setAttribute('hidden', 'hidden');
-        };
-
-        try {
-          if (sessionStorage.getItem(storageKey) === sitePasswordHash) {
-            unlock();
-          }
-        } catch {
-          // Ignore storage access failures and keep lock active.
-        }
-
-        lockForm?.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          const value = input instanceof HTMLInputElement ? input.value : '';
-          const hash = await sha256Hex(value);
-
-          if (hash === sitePasswordHash) {
-            try {
-              sessionStorage.setItem(storageKey, sitePasswordHash);
-            } catch {
-              // Ignore storage access failures and continue unlocked for this tab.
-            }
-            if (error) {
-              error.textContent = '';
-            }
-            unlock();
-            return;
-          }
-
-          if (error) {
-            error.textContent = 'Неверный пароль. Попробуйте снова.';
-          }
-          if (input instanceof HTMLInputElement) {
-            input.value = '';
-            input.focus();
-          }
-        });
-      }
-
+    <script>
       const elements = document.querySelectorAll('.reveal');
       const observer = new IntersectionObserver(
         (entries) => {
