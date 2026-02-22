@@ -14,6 +14,14 @@ npm install
 npm run dev
 ```
 
+### Пароль на весь сайт
+
+Сайт поддерживает парольную защиту через переменную окружения `SITE_PASSWORD`.
+
+- Локально: создайте файл `.env` в корне проекта и добавьте строку `SITE_PASSWORD=ваш_пароль`.
+- GitHub Pages: добавьте секрет репозитория `SITE_PASSWORD` (Settings -> Secrets and variables -> Actions -> New repository secret).
+- Если `SITE_PASSWORD` не задан, парольная защита отключена.
+
 ## Сборка
 
 ```bash
