@@ -314,6 +314,48 @@ const { sections } = Astro.props;
     );
   }
 
+  if (section.type === "image") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          {section.title ? <h2 class="section-title">{section.title}</h2> : null}
+          <figure class="doc-figure reveal">
+            <div class="doc-figure-frame">
+              <img src={withBase(section.src)} alt={section.title || section.caption || "Иллюстрация"} loading="lazy" />
+            </div>
+            {section.caption ? (
+              <figcaption class="doc-figure-caption">{section.caption}</figcaption>
+            ) : null}
+          </figure>
+        </Container>
+      </Section>
+    );
+  }
+
+  if (section.type === "researcher") {
+    return (
+      <Section alt={index % 2 === 1}>
+        <Container>
+          <div class="researcher-card reveal">
+            <div class="researcher-photo-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span class="researcher-photo-label">Фото исследователя</span>
+            </div>
+            <div class="researcher-info">
+              <h3 class="researcher-name">{section.name}</h3>
+              {section.title ? <p class="researcher-title">{section.title}</p> : null}
+              {section.affiliation ? <p class="researcher-affiliation">{section.affiliation}</p> : null}
+              {section.bio ? <p class="researcher-bio">{section.bio}</p> : null}
+            </div>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
   if (section.type === "sources") {
     return (
       <Section>
