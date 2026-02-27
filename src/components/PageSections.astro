@@ -336,18 +336,20 @@ const { sections } = Astro.props;
     return (
       <Section alt={index % 2 === 1}>
         <Container>
-          <div class="researcher-card reveal">
-            {section.photo ? (
-              <img class="researcher-photo" src={withBase(section.photo)} alt={section.name} loading="lazy" />
-            ) : (
-              <div class="researcher-photo-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-                <span class="researcher-photo-label">Фото исследователя</span>
-              </div>
-            )}
+          <div class={`researcher-card reveal${section.photo ? ' has-photo' : ''}`}>
+            <div class="researcher-portrait">
+              {section.photo ? (
+                <img class="researcher-photo" src={withBase(section.photo)} alt={section.name} loading="lazy" />
+              ) : (
+                <div class="researcher-photo-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <span class="researcher-photo-label">Фото исследователя</span>
+                </div>
+              )}
+            </div>
             <div class="researcher-info">
               <h3 class="researcher-name">{section.name}</h3>
               {section.title ? <p class="researcher-title">{section.title}</p> : null}
