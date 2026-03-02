@@ -1,49 +1,72 @@
 ﻿# NICUR Static Site
 
-Официальный статический сайт на Astro. Контент хранится в `src/content/pages/*.json`.
+Официальный статический сайт на Astro для проекта НИЦУР.
 
-## Установка зависимостей
+## Возможности
 
-```bash
-npm install
-```
+- Полностью статическая сборка (`output: "static"` в `astro.config.mjs`).
+- Контент страниц хранится в JSON-файлах `src/content/pages/*.json`.
+- Единый рендер секций через `src/components/PageSections.astro`.
+- Навигация и ссылки учитывают `base`-префикс (`/nicur`) через `src/utils/paths.ts`.
+- В шаблоне задан `noindex, nofollow`, а в `public/robots.txt` стоит `Disallow: /`.
+
+## Стек
+
+- Node.js 20 (рекомендуется; используется в GitHub Actions workflow).
+- Astro 4.13.2.
+- TypeScript 5.4.5.
+- npm.
+
+## Структура репозитория
+
+- `src/pages` - маршруты Astro-страниц.
+- `src/content/pages` - JSON-контент для страниц.
+- `src/components` - UI-компоненты и секции.
+- `src/layouts/BaseLayout.astro` - общий layout (meta, шапка, подвал, клиентские скрипты).
+- `src/config` - конфиг сайта и навигации.
+- `public` - статические ассеты (изображения, `robots.txt`, `sitemap.xml`).
+- `.github/workflows/build.yml` - CI/CD сборка и деплой на GitHub Pages.
 
 ## Локальный запуск
 
 ```bash
+npm install
 npm run dev
 ```
 
-### Пароль на весь сайт
+## Переменные окружения
 
-Сайт поддерживает парольную защиту через переменную окружения `SITE_PASSWORD`.
+Обязательных переменных окружения в текущем коде нет.
 
-- Локально: создайте файл `.env` в корне проекта и добавьте строку `SITE_PASSWORD=ваш_пароль`.
-- GitHub Pages: добавьте секрет репозитория `SITE_PASSWORD` (Settings -> Secrets and variables -> Actions -> New repository secret).
-- Если `SITE_PASSWORD` не задан, парольная защита отключена.
+`SITE_PASSWORD` передаётся в шаг `Build` GitHub Actions (`.github/workflows/build.yml`), но в директории `src/` на текущий момент не используется.
 
-## Сборка
+## Команды
 
 ```bash
-npm run build
+npm run dev      # локальная разработка
+npm run build    # production-сборка в dist/
+npm run preview  # локальный просмотр собранного dist/
 ```
 
-Собранные статические файлы находятся в папке `dist/`.
+## Архитектура
 
-## Деплой на GitHub Pages (опционально)
+- Каждая страница в `src/pages/*.astro` импортирует соответствующий JSON из `src/content/pages` и рендерит его через `PageSections`.
+- `BaseLayout` подключает глобальные стили, общую навигацию/контакты, SEO/OG-мета и JS для анимаций/карусели.
+- `withBase` и `stripBase` в `src/utils/paths.ts` обеспечивают корректные URL при деплое с `base: "/nicur"`.
 
-1. Включите GitHub Pages для репозитория.
-2. Установите Source: GitHub Actions.
-3. Запушьте изменения — workflow соберет проект и опубликует `dist/`.
+## Деплой
 
-## Перенос на любой статический хостинг
+Workflow `.github/workflows/build.yml` запускается на push в `main` и вручную (`workflow_dispatch`):
 
-1. Выполните `npm run build`.
-2. Загрузите содержимое `dist/` на хостинг (S3, Netlify, Vercel static, обычный FTP).
+1. `actions/checkout@v4`
+2. `actions/setup-node@v4` (Node 20, cache npm)
+3. `npm install`
+4. `npm run build`
+5. публикация `dist/` через `actions/upload-pages-artifact@v3` и `actions/deploy-pages@v4`
 
-## Структура
+Для GitHub Pages должен быть выбран источник `GitHub Actions`.
 
-- `src/content/pages` — весь текст и структура страниц.
-- `src/components` — UI-компоненты.
-- `src/layouts/BaseLayout.astro` — общий макет.
-- `public/` — favicon, og-image, robots.txt, sitemap.xml.
+## Troubleshooting
+
+- Если после деплоя ломаются ссылки/ассеты, проверьте согласованность `site`/`base` в `astro.config.mjs` и использование `withBase(...)` для внутренних путей.
+- Если в PowerShell видны кракозябры в русских JSON, сначала проверяйте байты: файлы проекта валидны как UTF-8, проблема может быть в отображении терминала.
