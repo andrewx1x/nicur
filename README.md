@@ -1,72 +1,64 @@
-﻿# NICUR Static Site
+# NICUR — Национальный исследовательский центр устойчивого развития
 
-Официальный статический сайт на Astro для проекта НИЦУР.
-
-## Возможности
-
-- Полностью статическая сборка (`output: "static"` в `astro.config.mjs`).
-- Контент страниц хранится в JSON-файлах `src/content/pages/*.json`.
-- Единый рендер секций через `src/components/PageSections.astro`.
-- Навигация и ссылки учитывают `base`-префикс (`/nicur`) через `src/utils/paths.ts`.
-- В шаблоне задан `noindex, nofollow`, а в `public/robots.txt` стоит `Disallow: /`.
+Статический сайт на Astro для проекта НИЦУР.
+Деплой: [andrewx1x.github.io/nicur](https://andrewx1x.github.io/nicur/)
 
 ## Стек
 
-- Node.js 20 (рекомендуется; используется в GitHub Actions workflow).
-- Astro 4.13.2.
-- TypeScript 5.4.5.
-- npm.
+- **Astro** 4.13.2 — статическая генерация
+- **Node.js** 20
+- **TypeScript** 5.4.5
+- **GitHub Pages** — хостинг через GitHub Actions
 
-## Структура репозитория
+## Структура
 
-- `src/pages` - маршруты Astro-страниц.
-- `src/content/pages` - JSON-контент для страниц.
-- `src/components` - UI-компоненты и секции.
-- `src/layouts/BaseLayout.astro` - общий layout (meta, шапка, подвал, клиентские скрипты).
-- `src/config` - конфиг сайта и навигации.
-- `public` - статические ассеты (изображения, `robots.txt`, `sitemap.xml`).
-- `.github/workflows/build.yml` - CI/CD сборка и деплой на GitHub Pages.
+```
+src/
+├── pages/              — маршруты Astro-страниц
+├── content/pages/      — JSON-контент для каждой страницы
+├── components/         — UI-компоненты (PageSections, Card, Prose и др.)
+├── layouts/            — BaseLayout (meta, навигация, подвал, скрипты)
+├── config/             — конфиг сайта и навигации
+├── styles/global.css   — глобальные стили
+└── utils/paths.ts      — утилиты для base-префикса URL
+public/
+├── images/             — изображения из исследовательских документов
+└── photos/             — фотографии объектов
+```
+
+## Типы секций
+
+Контент каждой страницы — массив секций в JSON. Доступные типы:
+
+| Тип | Описание |
+|-----|----------|
+| `hero` | Заголовок страницы |
+| `text` | Текстовые абзацы |
+| `stats` | Карточки с крупными цифрами |
+| `features` | Карточки с иконкой и описанием |
+| `timeline` | Вертикальная шкала этапов |
+| `table` | Таблица данных |
+| `tiles` | Плитки-ссылки на разделы |
+| `image` | Иллюстрация из документа с подписью |
+| `researcher` | Карточка исследователя (фото + био) |
+| `publications` | Список публикаций |
+| `carousel` | Карусель фотографий |
+| `map` | Яндекс.Карта с объектами |
+| `sources` | Источники информации |
 
 ## Локальный запуск
 
 ```bash
 npm install
-npm run dev
+npm run dev      # разработка
+npm run build    # сборка в dist/
+npm run preview  # просмотр сборки
 ```
-
-## Переменные окружения
-
-Обязательных переменных окружения в текущем коде нет.
-
-`SITE_PASSWORD` передаётся в шаг `Build` GitHub Actions (`.github/workflows/build.yml`), но в директории `src/` на текущий момент не используется.
-
-## Команды
-
-```bash
-npm run dev      # локальная разработка
-npm run build    # production-сборка в dist/
-npm run preview  # локальный просмотр собранного dist/
-```
-
-## Архитектура
-
-- Каждая страница в `src/pages/*.astro` импортирует соответствующий JSON из `src/content/pages` и рендерит его через `PageSections`.
-- `BaseLayout` подключает глобальные стили, общую навигацию/контакты, SEO/OG-мета и JS для анимаций/карусели.
-- `withBase` и `stripBase` в `src/utils/paths.ts` обеспечивают корректные URL при деплое с `base: "/nicur"`.
 
 ## Деплой
 
-Workflow `.github/workflows/build.yml` запускается на push в `main` и вручную (`workflow_dispatch`):
+GitHub Actions (`.github/workflows/build.yml`) — автоматический деплой на GitHub Pages при push в `main`.
 
-1. `actions/checkout@v4`
-2. `actions/setup-node@v4` (Node 20, cache npm)
-3. `npm install`
-4. `npm run build`
-5. публикация `dist/` через `actions/upload-pages-artifact@v3` и `actions/deploy-pages@v4`
+## Контент
 
-Для GitHub Pages должен быть выбран источник `GitHub Actions`.
-
-## Troubleshooting
-
-- Если после деплоя ломаются ссылки/ассеты, проверьте согласованность `site`/`base` в `astro.config.mjs` и использование `withBase(...)` для внутренних путей.
-- Если в PowerShell видны кракозябры в русских JSON, сначала проверяйте байты: файлы проекта валидны как UTF-8, проблема может быть в отображении терминала.
+Весь текстовый контент и изображения взяты из исследовательских документов (DOCX, PDF, PPTX) проекта НИЦУР.
