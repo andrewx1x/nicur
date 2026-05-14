@@ -1,6 +1,13 @@
-﻿---
+---
 import Container from "./Container.astro";
 import { site } from "../config/site";
+import { withBase } from "../utils/paths";
+
+const currentYear = new Date().getFullYear();
+const yearRange =
+  currentYear > site.owner.yearFrom
+    ? `${site.owner.yearFrom}–${currentYear}`
+    : `${site.owner.yearFrom}`;
 ---
 <footer class="footer">
   <Container>
@@ -8,13 +15,24 @@ import { site } from "../config/site";
       <div class="footer-contacts">
         <h3>{site.contacts.title}</h3>
         <p>{site.contacts.city}</p>
-        <p>{site.contacts.phone}</p>
-        <p>{site.contacts.email}</p>
+        <p>{site.contacts.email} <a href={`mailto:${site.owner.email}`}>{site.owner.email}</a></p>
+      </div>
+      <div class="footer-owner">
+        <h3>Информация о владельце сайта</h3>
+        <p>Владелец и администратор сайта: {site.owner.fullName}</p>
+        <p>Контактный e-mail: <a href={`mailto:${site.owner.email}`}>{site.owner.email}</a></p>
       </div>
       <div class="footer-credit">
         <a href="https://t.me/andrewqaz" target="_blank" rel="noopener noreferrer">Разработка сайта и контента</a>
       </div>
     </div>
+    <p class="footer-disclaimer">{site.legalDisclaimer}</p>
     <p class="notice">{site.notice}</p>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; {yearRange} {site.owner.fullName}. Все права защищены.</p>
+      <p class="footer-links">
+        <a href={withBase("/privacy")}>Политика конфиденциальности</a>
+      </p>
+    </div>
   </Container>
 </footer>
