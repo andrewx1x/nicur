@@ -29,7 +29,8 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toStri
   <body>
     <div class="notice-banner">
       <Container>
-        {site.notice}
+        <p class="notice-disclaimer"><strong>Внимание:</strong> {site.legalDisclaimer}</p>
+        <p class="notice-text">{site.notice}</p>
       </Container>
     </div>
     <HeaderNav currentPath={Astro.url.pathname} />

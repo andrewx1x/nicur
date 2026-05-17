@@ -26,10 +26,11 @@ const yearRange =
         <a href="https://t.me/andrewqaz" target="_blank" rel="noopener noreferrer">Разработка сайта и контента</a>
       </div>
     </div>
-    <p class="footer-disclaimer">{site.legalDisclaimer}</p>
-    <p class="notice">{site.notice}</p>
     <div class="footer-bottom">
-      <p class="footer-copy">&copy; {yearRange} {site.owner.fullName}. Все права защищены.</p>
+      <p class="footer-copy">
+        &copy; {yearRange} {site.owner.fullName}. Все права защищены.
+        <span class="age-mark" aria-label="Возрастная категория информационной продукции 0+">0+</span>
+      </p>
       <p class="footer-links">
         <a href={withBase("/privacy")}>Политика конфиденциальности</a>
       </p>
